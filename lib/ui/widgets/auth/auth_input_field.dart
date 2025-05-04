@@ -78,7 +78,7 @@ class CustomInputField extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (username != null) ForgotPasswordLink(email: username!),
+                  if (username != null) ForgotPasswordLink(userName: username!),
                   ShowHidePasswordButton(
                     showPassword: showPassword,
                     onTap: onToggleVisibility ?? () {},
@@ -93,8 +93,8 @@ class CustomInputField extends StatelessWidget {
 }
 
 class ForgotPasswordLink extends StatelessWidget {
-  final String email;
-  const ForgotPasswordLink({super.key, required this.email});
+  final String userName;
+  const ForgotPasswordLink({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class ForgotPasswordLink extends StatelessWidget {
       padding: [0, 0, 0, 0],
       child: TextButton(
         onPressed: () {
-          context.go('/login/forgetPassword', extra: email);
+          context.goNamed("forgetPassword", extra: userName);
         },
         child: const ResponsiveText(
           'Forgot password?',

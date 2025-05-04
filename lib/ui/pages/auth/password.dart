@@ -42,7 +42,7 @@ class _PasswordPageState extends State<PasswordPage> {
     final text = passwordController.text;
     setState(() {
       hasPasswordText = text.isNotEmpty;
-      isPasswordValid = text.length >= 6; // Example validation
+      isPasswordValid = text.length >= 8;
       isButtonEnabled = isPasswordValid && hasPasswordText;
     });
   }
@@ -103,7 +103,8 @@ class _PasswordPageState extends State<PasswordPage> {
                     label: 'Proceed',
                     isEnabled: isButtonEnabled,
                     onPressed: () {
-                      logger.i('Proceed clicked with password: ${passwordController.text}');
+                      logger.i(
+                          'Proceed clicked with password: ${passwordController.text}');
                       // Proceed to next screen or login
                     },
                   ),
