@@ -1,6 +1,10 @@
+import 'package:BuildTek/bloc/auth/authenticate/authenicate_bloc.dart';
+import 'package:BuildTek/bloc/auth/authenticate/authenticate_event.dart';
+import 'package:BuildTek/config/app_providers.dart';
 import 'package:BuildTek/config/toastication_config.dart';
 import 'package:BuildTek/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {
@@ -14,12 +18,27 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return ToastificationWrapper(
-      config: toaster.getConfig(),
-      child: MaterialApp.router(
-        debugShowMaterialGrid: false,
-        title: "BuildTek Leadflow",
-        routerConfig: AppRouter.router,
+    return MultiRepositoryProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => AuthenticationBloc()..add(LoginEvent()),
+        ),
+        ...AppProviders.repositoryProvider,
+      ],
+      child: MultiBlocProvider(
+        providers: AppProviders.blocProviders,
+        child: Builder(
+          builder: (context) {
+            return ToastificationWrapper(
+              config: toaster.getConfig(),
+              child: MaterialApp.router(
+                debugShowMaterialGrid: false,
+                title: "BuildTek Leadflow",
+                routerConfig: AppRouter.router,
+              ),
+            );
+          },
+        ),
       ),
     );
   }
