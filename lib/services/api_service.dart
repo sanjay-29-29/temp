@@ -301,7 +301,7 @@ class ApiService {
                   : null,
           success: resp['success'],
           message: resp['message'],
-          statusCode: response.statusCode.toString(),
+          statusCode: response.statusCode,
         );
       } else {
         String errorMessage;
@@ -314,7 +314,7 @@ class ApiService {
           data: null,
           error: resp['errors'],
           message: errorMessage,
-          statusCode: response.statusCode.toString(),
+          statusCode: response.statusCode,
           success: resp['success'],
         );
       }
@@ -324,7 +324,7 @@ class ApiService {
         data: null,
         error: 'Something went wrong',
         message: 'Something went wrong',
-        statusCode: response.statusCode.toString(),
+        statusCode: response.statusCode,
         success: false,
       );
     }

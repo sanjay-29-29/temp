@@ -7,7 +7,7 @@ part 'api_response_model.g.dart';
 class ApiResponse<T> extends Equatable {
   final T? data;
   final dynamic error;
-  final String? statusCode;
+  final int? statusCode;
   final String? message;
   final bool? success;
 

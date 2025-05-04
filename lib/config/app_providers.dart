@@ -1,5 +1,6 @@
 import 'package:BuildTek/bloc/auth/authenticate/authenicate_bloc.dart';
 import 'package:BuildTek/bloc/auth/authenticate/authenticate_event.dart';
+import 'package:BuildTek/bloc/auth/login/login_bloc.dart';
 import 'package:BuildTek/bloc/auth/splash/splashscreen_bloc.dart';
 import 'package:BuildTek/respositories/auth/auth_repository.dart';
 import 'package:BuildTek/services/api_service.dart';
@@ -35,17 +36,16 @@ class AppProviders {
       lazy: true,
     ),
 
-     BlocProvider<AuthenticationBloc>(
+    BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc()..add(LoginEvent()),
-    )
-  
-    // BlocProvider<AuthLoginBloc>(
-    //   create:
-    //       (context) => AuthLoginBloc(
-    //         deviceBloc: BlocProvider.of<DeviceBloc>(context),
-    //         authRepository: RepositoryProvider.of<AuthRepository>(context),
-    //       ),
-    //   lazy: true,
-    // ),
+    ),
+
+    BlocProvider<AuthLoginBloc>(
+      create:
+          (context) => AuthLoginBloc(
+            authRepository: RepositoryProvider.of<AuthRepository>(context),
+          ),
+      lazy: true,
+    ),
   ];
 }

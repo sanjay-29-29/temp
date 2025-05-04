@@ -10,7 +10,9 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   }
 
   Future _onInitializeApp(
-      InitializeApp event, Emitter<SplashScreenState> emit) async {
+    InitializeApp event,
+    Emitter<SplashScreenState> emit,
+  ) async {
     emit(SplashScreenLoading());
 
     await Future.delayed(const Duration(milliseconds: 800));
@@ -18,7 +20,9 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   }
 
   Future _onInitializeWeb(
-      InitializeWeb event, Emitter<SplashScreenState> emit) async {
+    InitializeWeb event,
+    Emitter<SplashScreenState> emit,
+  ) async {
     emit(SplashScreenLoading());
 
     await Future.delayed(const Duration(milliseconds: 800));

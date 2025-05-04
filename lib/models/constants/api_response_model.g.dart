@@ -12,7 +12,7 @@ ApiResponse<T> _$ApiResponseFromJson<T>(
 ) => ApiResponse<T>(
   data: _$nullableGenericFromJson(json['data'], fromJsonT),
   error: json['error'],
-  statusCode: json['statusCode'] as String?,
+  statusCode: (json['statusCode'] as num?)?.toInt(),
   message: json['message'] as String?,
   success: json['success'] as bool?,
 );

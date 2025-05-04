@@ -1,3 +1,4 @@
+import 'package:BuildTek/routes/dashboard/dashboard_routes.dart';
 import 'package:BuildTek/ui/pages/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'auth/auth_routers.dart';
@@ -10,7 +11,8 @@ class AppRouter {
         path: SplashScreenPage.route,
         builder: (context, state) => const SplashScreenPage(),
       ),
-      ...AuthRouters.routes
+      ...AuthRouters.routes,
+      ...DashboardRoutes.routes,
     ],
   );
 }
