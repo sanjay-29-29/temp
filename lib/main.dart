@@ -1,4 +1,5 @@
-import 'package:buildtek_ui/routes/app_router.dart';
+import 'package:BuildTek/config/toastication_config.dart';
+import 'package:BuildTek/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
+      config: toaster.getConfig(),
       child: MaterialApp.router(
-        debugShowMaterialGrid: true,
+        debugShowMaterialGrid: false,
         title: "BuildTek Leadflow",
         routerConfig: AppRouter.router,
       ),

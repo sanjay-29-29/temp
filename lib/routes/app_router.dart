@@ -1,15 +1,16 @@
-import 'package:buildtek_ui/ui/pages/auth/login.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:BuildTek/ui/pages/splash_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'auth/auth_routers.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: LoginPage.route,
+    initialLocation: SplashScreenPage.route,
     routes: [
       GoRoute(
-        path: LoginPage.route,
-        builder: (context, state) => const LoginPage(),
+        path: SplashScreenPage.route,
+        builder: (context, state) => const SplashScreenPage(),
       ),
+      ...AuthRouters.routes
     ],
   );
 }

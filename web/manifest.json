@@ -1,6 +1,6 @@
 {
-    "name": "buildtek_ui",
-    "short_name": "buildtek_ui",
+    "name": "BuildTek",
+    "short_name": "BuildTek",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
