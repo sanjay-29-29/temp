@@ -1,4 +1,3 @@
-import 'package:BuildTek/models/auth/otp_model.dart';
 import 'package:BuildTek/models/auth/user_identity_model.dart';
 import 'package:BuildTek/ui/pages/auth/add_device.dart';
 import 'package:BuildTek/ui/pages/auth/create_password.dart';
@@ -39,8 +38,8 @@ class AuthRouters {
       name: "otp",
       path: OTPPage.route,
       builder: (context, state) {
-        OtpModel otpModel = state.extra as OtpModel;
-        return OTPPage(otpModel: otpModel);
+        String phoneNo = state.extra as String;
+        return OTPPage(phoneNo: phoneNo);
       },
     ),
     GoRoute(
@@ -64,9 +63,7 @@ class AuthRouters {
       path: ForgetPasswordPage.route,
       builder: (context, state) {
         String username = state.extra as String;
-        return ForgetPasswordPage(
-          userName: username,
-        );
+        return ForgetPasswordPage(userName: username);
       },
     ),
     GoRoute(

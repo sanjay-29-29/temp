@@ -6,7 +6,7 @@ import '../../wrapper_class/responseive_container.dart';
 import '../../wrapper_class/responsive_text.dart';
 
 class DeviceDetailsSection extends StatefulWidget {
-  final FetchDevice device;
+  final FetchDeviceModel device;
   final Employee employee;
   const DeviceDetailsSection({
     super.key,
@@ -30,7 +30,7 @@ class DeviceDetailsSectionState extends State<DeviceDetailsSection> {
   }
 
   Widget _buildDeviceDetails(
-      BuildContext context, FetchDevice device, Employee employee) {
+      BuildContext context, FetchDeviceModel device, Employee employee) {
     return ResponsiveContainer(
       width: 366,
       height: 282,

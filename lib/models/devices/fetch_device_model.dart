@@ -4,12 +4,12 @@ import 'package:json_annotation/json_annotation.dart';
 part 'fetch_device_model.g.dart';
 
 @JsonSerializable()
-class FetchDevice extends Equatable {
+class FetchDeviceModel extends Equatable {
   final String? deviceId;
   final String deviceMake;
   final String deviceModel;
 
-  const FetchDevice({
+  const FetchDeviceModel({
     required this.deviceId,
     required this.deviceMake,
     required this.deviceModel,
@@ -22,7 +22,7 @@ class FetchDevice extends Equatable {
         deviceModel,
       ];
 
-  factory FetchDevice.fromJson(Map<String, dynamic> json) =>
-      _$FetchDeviceFromJson(json);
-  Map<String, dynamic> toJson() => _$FetchDeviceToJson(this);
+  factory FetchDeviceModel.fromJson(Map<String, dynamic> json) =>
+      _$FetchDeviceModelFromJson(json);
+  Map<String, dynamic> toJson() => _$FetchDeviceModelToJson(this);
 }

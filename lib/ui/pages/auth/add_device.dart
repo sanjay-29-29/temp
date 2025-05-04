@@ -10,7 +10,7 @@ import '../../widgets/device/device_instruction.dart';
 class AddDevicePage extends StatefulWidget {
   static const String route = '/addDevice';
 
-  final FetchDevice device;
+  final FetchDeviceModel device;
   final Employee employee;
 
   const AddDevicePage({

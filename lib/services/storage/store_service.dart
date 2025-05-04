@@ -7,7 +7,7 @@ import 'package:BuildTek/models/devices/fetch_device_model.dart';
 import 'package:BuildTek/services/storage/secure_storage.dart';
 
 class StoreService {
-  static Future<void> storeDeviceDetails(FetchDevice device) async {
+  static Future<void> storeDeviceDetails(FetchDeviceModel device) async {
     final jsonString = jsonEncode(device.toJson());
     logger.i("::::::::::: Device data stored :::::::::::::");
     await SecureStorageService.write('device', jsonString);
@@ -53,10 +53,10 @@ class StoreService {
     logger.i("::::::::::: fcm token stores:::::::::::::");
   }
 
-  static Future<FetchDevice> getDeviceDetails() async {
+  static Future<FetchDeviceModel> getDeviceDetails() async {
     String? deviceDataJson = await SecureStorageService.read('device');
     if (deviceDataJson != null) {
-      return FetchDevice.fromJson(jsonDecode(deviceDataJson));
+      return FetchDeviceModel.fromJson(jsonDecode(deviceDataJson));
     } else {
       throw Exception('No device data found');
     }

@@ -41,7 +41,7 @@ class ApiService {
   }
 
   Future<String> _getDeviceId() async {
-    FetchDevice device = await StoreService.getDeviceDetails();
+    FetchDeviceModel device = await StoreService.getDeviceDetails();
     if (device.deviceId != null) {
       return device.deviceId!;
     }
@@ -91,9 +91,10 @@ class ApiService {
 
     final responseStream = await response.stream.bytesToString();
     // -----
-    if (response.statusCode == 401) {
+    final responseJson = json.decode(responseStream);
+    if (response.statusCode == 401 &&
+        !(responseJson['message'] == 'Invalid credentials')) {
       final refreshToken = await getRefreshToken();
-      print('Refresh Token: $refreshToken');
       var uri = Uri.parse('$baseUrl${ApiEndpoints.refreshToken}');
       final refreshTokenResponse = await http.Client().send(
         http.Request('POST', uri)

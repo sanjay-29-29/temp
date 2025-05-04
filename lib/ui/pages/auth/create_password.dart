@@ -1,8 +1,14 @@
+import 'package:BuildTek/bloc/auth/login/login_bloc.dart';
+import 'package:BuildTek/bloc/auth/login/login_event.dart';
+import 'package:BuildTek/bloc/auth/login/login_state.dart';
+import 'package:BuildTek/config/toastication_config.dart';
 import 'package:BuildTek/constants/asset_constants.dart';
 import 'package:BuildTek/ui/frames/auth/login_frame.dart';
 import 'package:BuildTek/ui/widgets/auth/auth_input_field.dart';
 import 'package:BuildTek/ui/widgets/auth/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../models/auth/user_identity_model.dart';
 import '../../wrapper_class/response_sizedbox.dart';
@@ -25,6 +31,7 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
   final TextEditingController conformPasswordController =
       TextEditingController();
   bool isButtonEnabled = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -45,7 +52,7 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
   void _updateState() {
     if (createpasswordController.text == conformPasswordController.text &&
         createpasswordController.text.isNotEmpty &&
-        createpasswordController.text.length > 8) {
+        createpasswordController.text.length >= 8) {
       setState(() {
         isButtonEnabled = true;
       });
@@ -60,65 +67,76 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF023E8A),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ResponsiveContainer(
-                    width: 414,
-                    height: 447,
-                    child: FrameLogin(
-                      gridImagePath: AssetConstants.gridImage,
-                      name:
-                          '${widget.usernameDetails.firstName} ${widget.usernameDetails.lastName}',
-                      role: widget.usernameDetails.role.roleName,
-                      department: widget.usernameDetails.department.name,
-                      image: widget.usernameDetails.image,
-                      topic: 'SET PASSWORD',
-                      phoneNo: widget.usernameDetails.phoneNo,
+      body: BlocListener<AuthLoginBloc, AuthLoginState>(
+        listener: (context, state) {
+          setState(() => isLoading = state is AuthLoginLoadingState);
+          if (state is AuthCreatePasswordSuccessState) {
+            toaster.showSuccess(title: state.message);
+            context.go(state.route);
+          } else if (state is AuthLoginErrorState) {
+            toaster.showError(title: state.message);
+          }
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ResponsiveContainer(
+                      width: 414,
+                      height: 447,
+                      child: FrameLogin(
+                        gridImagePath: AssetConstants.gridImage,
+                        name:
+                            '${widget.usernameDetails.firstName} ${widget.usernameDetails.lastName}',
+                        role: widget.usernameDetails.role.roleName,
+                        department: widget.usernameDetails.department.name,
+                        image: widget.usernameDetails.image,
+                        topic: 'SET PASSWORD',
+                        phoneNo: widget.usernameDetails.phoneNo,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 140),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomInputField(
-                        controller: createpasswordController,
-                        label: 'CREATE PASSWORD',
-                        inputType: TextInputType.visiblePassword,
-                        hintText: 'Enter Your Password',
-                      ),
-                      const ResponsiveSizedBox(height: 15, width: 0),
-                      CustomInputField(
-                        controller: conformPasswordController,
-                        label: 'CONFORM PASSWORD',
-                        inputType: TextInputType.visiblePassword,
-                        hintText: 'Re-Enter Your Password',
-                      ),
-                      const ResponsiveSizedBox(height: 30, width: 0),
-                      CustomButton(
-                        label: 'Confirm Password',
-                        onPressed: () {
-                          // context.read<AuthLoginBloc>().add(
-                          //       SetPasswordEvent(
-                          //         password: createpasswordController.text,
-                          //         userId: widget.usernameDetails.phoneNo,
-                          //       ),
-                          //     );
-                        },
-                        isEnabled: isButtonEnabled,
-                      ),
-                    ],
-                  ),
-                ],
+                    const SizedBox(height: 140),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomInputField(
+                          controller: createpasswordController,
+                          label: 'CREATE PASSWORD',
+                          inputType: TextInputType.visiblePassword,
+                          hintText: 'Enter Your Password',
+                        ),
+                        const ResponsiveSizedBox(height: 15, width: 0),
+                        CustomInputField(
+                          controller: conformPasswordController,
+                          label: 'CONFORM PASSWORD',
+                          inputType: TextInputType.visiblePassword,
+                          hintText: 'Re-Enter Your Password',
+                        ),
+                        const ResponsiveSizedBox(height: 30, width: 0),
+                        CustomButton(
+                          label: 'Confirm Password',
+                          onPressed: () {
+                            context.read<AuthLoginBloc>().add(
+                              AuthSetPasswordEvent(
+                                password: createpasswordController.text,
+                                phoneNo: widget.usernameDetails.phoneNo,
+                              ),
+                            );
+                          },
+                          isEnabled: isButtonEnabled,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

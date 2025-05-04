@@ -73,9 +73,12 @@ class _UserNamePageState extends State<UserNamePage> {
             });
           }
           if (state is AuthUserIdentitySuccess) {
-            context.go(state.route, extra: state.userIdentityModel);
+            context.push(state.route, extra: state.userIdentityModel);
+          } else if (state is AuthPasswordNotSetState) {
+            toaster.showInfo(title: state.message);
+            context.push(state.route, extra: state.phoneNo);
           } else if (state is AuthUserNotFoundState) {
-            context.go(state.route, extra: _userNameController.text);
+            context.push(state.route, extra: _userNameController.text);
             toaster.showInfo(title: "User Not Found", msg: state.message);
           } else if (state is AuthLoginErrorState) {
             toaster.showError(title: state.message);
