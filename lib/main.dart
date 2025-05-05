@@ -2,7 +2,6 @@ import 'package:BuildTek/bloc/auth/authenticate/authenicate_bloc.dart';
 import 'package:BuildTek/bloc/auth/authenticate/authenticate_event.dart';
 import 'package:BuildTek/config/app_providers.dart';
 import 'package:BuildTek/config/toastication_config.dart';
-import 'package:BuildTek/constants/color_constants.dart';
 import 'package:BuildTek/routes/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

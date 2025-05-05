@@ -10,6 +10,35 @@ class StyleConstants {
     color: Color.fromRGBO(0, 119, 182, 1),
   );
 
+  static const TextStyle profileTextStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Inter',
+    color: Color.fromRGBO(211, 229, 255, 1),
+    height: 1.428,
+  );
+
+  static const TextStyle notificationTextStyle = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    height: 1,
+    fontFamily: 'Inter',
+  );
+
+  static const TextStyle addDetailsTextStyle = TextStyle(
+    color: Colors.white70,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Inter',
+  );
+  static const TextStyle addDetailsWhiteTextStyle = TextStyle(
+    color: Color.fromRGBO(53, 50, 43, 1),
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Inter',
+  );
+
   static const TextStyle formButtonTextStyle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -39,7 +68,10 @@ class StyleConstants {
   );
 
   static TextStyle customStyle(
-      double fontSize, Color? color, FontWeight? fontWeight) {
+    double fontSize,
+    Color? color,
+    FontWeight? fontWeight,
+  ) {
     return TextStyle(
       fontSize: fontSize,
       fontWeight: fontWeight ?? FontWeight.w500,
