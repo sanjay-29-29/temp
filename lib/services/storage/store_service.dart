@@ -14,9 +14,11 @@ class StoreService {
   }
 
   static Future<void> storeCustomers(
-      List<CustomerDetailsModel> customers) async {
-    final jsonString =
-        jsonEncode(customers.map((customer) => customer.toJson()).toList());
+    List<CustomerDetailsModel> customers,
+  ) async {
+    final jsonString = jsonEncode(
+      customers.map((customer) => customer.toJson()).toList(),
+    );
     logger.i("::::::::::: Customer data stored :::::::::::::");
 
     await SecureStorageService.write('customers', jsonString);

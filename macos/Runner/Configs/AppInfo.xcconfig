@@ -8,7 +8,7 @@
 PRODUCT_NAME = BuildTek
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.buildtekUi
+PRODUCT_BUNDLE_IDENTIFIER = com.buildtech.LeadflowUi
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2025 com.example. All rights reserved.

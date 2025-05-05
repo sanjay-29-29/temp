@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544400194701",
+    "project_id": "buildtech-leadflow",
+    "storage_bucket": "buildtech-leadflow.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544400194701:android:8a20e174dee485f1e036c4",
+        "android_client_info": {
+          "package_name": "com.buildtech.Leadflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfRntbLMlRaGreau0AUANl2AhfzSjquPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

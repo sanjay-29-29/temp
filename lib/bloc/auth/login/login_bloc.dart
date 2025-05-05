@@ -23,9 +23,8 @@ class AuthLoginBloc extends Bloc<AuthLoginEvent, AuthLoginState> {
     on<AuthGetOTPEvent>(_onGetOTPEvent);
     on<AuthSubmitOTPEvent>(_onSubmitOTPEvent);
     on<AuthSetPasswordEvent>(_onSetPasswordEvent);
-    
+
     on<AuthFetchDeviceDetailsEvent>(_onFetchDeviceDetailsEvent);
-    
   }
 
   void _onSubmitUserNameEvent(
@@ -291,11 +290,11 @@ class AuthLoginBloc extends Bloc<AuthLoginEvent, AuthLoginState> {
       }
 
       await StoreService.storeDeviceDetails(device);
+      await Future.delayed(const Duration(seconds: 1));
+      // print("::::::::::::::Device data::::::::::::::${device.toJson()}");
       emit(AuthDeviceLoadedSuccessState(fetchDeviceModel: device));
     } catch (e) {
       emit(AuthLoginErrorState(message: e.toString()));
     }
   }
-
-
 }

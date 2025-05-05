@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363430562024",
+    "project_id": "buildtech-334a6",
+    "storage_bucket": "buildtech-334a6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363430562024:android:3bc91293cef498119c615d",
+        "android_client_info": {
+          "package_name": "com.buildtech.Leadflow.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9CI6iAyrYYmCGMCsXPb38PGB1jLPQspA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
