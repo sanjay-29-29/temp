@@ -1,5 +1,4 @@
-import 'package:BuildTek/models/auth/user_login_details_model.dart';
-import 'package:BuildTek/models/devices/fetch_device_model.dart';
+import 'package:BuildTek/models/devices/add_device_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AuthLoginEvent extends Equatable {
@@ -52,8 +51,7 @@ class AuthDeviceVerificationEvent extends AuthLoginEvent {}
 class AuthUpdateDeviceEvent extends AuthLoginEvent {}
 
 class AuthAddDeviceEvent extends AuthLoginEvent {
-  final FetchDeviceModel device;
-  final Employee employee;
+  final AddDeviceModel device;
 
-  AuthAddDeviceEvent({required this.device, required this.employee});
+  AuthAddDeviceEvent({required this.device});
 }

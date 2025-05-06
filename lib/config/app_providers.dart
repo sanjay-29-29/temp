@@ -2,13 +2,16 @@ import 'package:BuildTek/bloc/auth/authenticate/authenicate_bloc.dart';
 import 'package:BuildTek/bloc/auth/authenticate/authenticate_event.dart';
 import 'package:BuildTek/bloc/auth/login/login_bloc.dart';
 import 'package:BuildTek/bloc/auth/splash/splashscreen_bloc.dart';
+import 'package:BuildTek/bloc/dashboard/hr_bloc/verify_employee/verify_employee_bloc.dart';
 import 'package:BuildTek/bloc/dashboard/role_department/role_department_bloc.dart';
 import 'package:BuildTek/bloc/features/book/book_bloc.dart';
 import 'package:BuildTek/respositories/auth/auth_repository.dart';
 import 'package:BuildTek/respositories/book/book_repository.dart';
+import 'package:BuildTek/respositories/role-based/hr/verify_employee/verify_employee_repository.dart';
 import 'package:BuildTek/services/api_service.dart';
 import 'package:BuildTek/services/auth/auth_service.dart';
 import 'package:BuildTek/services/books/books_service.dart';
+import 'package:BuildTek/services/role-based/hr/verify_employee/verify_employee_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppProviders {
@@ -29,6 +32,12 @@ class AppProviders {
       create: (context) => BooksService(apiService: context.read<ApiService>()),
       lazy: true,
     ),
+    RepositoryProvider<VerifyEmployeeService>(
+      create:
+          (context) =>
+              VerifyEmployeeService(apiService: context.read<ApiService>()),
+      lazy: true,
+    ),
 
     // ---- Repositories ----
     RepositoryProvider<AuthRepository>(
@@ -42,8 +51,15 @@ class AppProviders {
               BookRepository(bookService: context.read<BooksService>()),
       lazy: true,
     ),
+    RepositoryProvider<VerifyEmployeeRepository>(
+      create:
+          (context) => VerifyEmployeeRepository(
+            verifyEmployeeService: context.read<VerifyEmployeeService>(),
+          ),
+      lazy: true,
+    ),
   ];
-
+  // --- Bloc Providers ---
   static List<BlocProvider> blocProviders = [
     BlocProvider<SplashScreenBloc>(
       create: (context) => SplashScreenBloc(),
@@ -65,13 +81,20 @@ class AppProviders {
       create: (context) => RoleDepartmentBloc(),
       lazy: true,
     ),
-      BlocProvider<BookBloc>(
+    BlocProvider<BookBloc>(
       create:
           (context) => BookBloc(
             bookRepository: RepositoryProvider.of<BookRepository>(context),
           ),
       lazy: true,
     ),
-
+    BlocProvider<VerifyEmployeeBloc>(
+      create:
+          (context) => VerifyEmployeeBloc(
+            verifyEmployeeRepository:
+                RepositoryProvider.of<VerifyEmployeeRepository>(context),
+          ),
+      lazy: true,
+    ),
   ];
 }

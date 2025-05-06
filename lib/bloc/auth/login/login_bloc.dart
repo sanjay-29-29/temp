@@ -25,6 +25,7 @@ class AuthLoginBloc extends Bloc<AuthLoginEvent, AuthLoginState> {
     on<AuthSetPasswordEvent>(_onSetPasswordEvent);
 
     on<AuthFetchDeviceDetailsEvent>(_onFetchDeviceDetailsEvent);
+    on<AuthAddDeviceEvent>(_onAddDeviceEvent);
   }
 
   void _onSubmitUserNameEvent(
@@ -295,6 +296,29 @@ class AuthLoginBloc extends Bloc<AuthLoginEvent, AuthLoginState> {
       emit(AuthDeviceLoadedSuccessState(fetchDeviceModel: device));
     } catch (e) {
       emit(AuthLoginErrorState(message: e.toString()));
+    }
+  }
+
+  void _onAddDeviceEvent(
+    AuthAddDeviceEvent event,
+    Emitter<AuthLoginState> emit,
+  ) async {
+    emit(AuthLoginLoadingState());
+    try {
+      final response = await authRepository.addDevice(event.device);
+      if (response.success != true) {
+        emit(AuthLoginErrorState(message: response.message ?? "Error"));
+        return;
+      }
+      emit(
+        AuthAddDeviceSuccessState(
+          message: response.message ?? "Success",
+          route: RouteConstants.deviceProcessing,
+        ),
+      );
+    } catch (e) {
+      logger.e(e.toString());
+      emit(AuthLoginErrorState(message: "Something went wrong"));
     }
   }
 }

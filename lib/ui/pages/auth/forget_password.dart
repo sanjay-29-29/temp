@@ -1,5 +1,6 @@
 import 'package:BuildTek/constants/asset_constants.dart';
 import 'package:BuildTek/constants/color_constants.dart';
+import 'package:BuildTek/ui/widgets/auth/forgetpasswrod_field.dart';
 import 'package:BuildTek/ui/wrapper_class/responseive_container.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
               frameImagePath: AssetConstants.frameImage,
             ),
           ),
-          
+          ForgetPasswordField(username: widget.userName),
         ],
       ),
     );

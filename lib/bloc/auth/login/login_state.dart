@@ -103,6 +103,13 @@ class AuthAddDeviceState extends AuthLoginState {
   });
 }
 
+class AuthAddDeviceSuccessState extends AuthLoginState {
+  final String message;
+  final String route;
+
+  AuthAddDeviceSuccessState({required this.message, required this.route});
+}
+
 class AuthDeviceLoadedSuccessState extends AuthLoginState {
   final FetchDeviceModel fetchDeviceModel;
 
