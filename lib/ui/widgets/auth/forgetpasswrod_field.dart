@@ -1,7 +1,10 @@
+import 'package:BuildTek/bloc/auth/login/login_bloc.dart';
+import 'package:BuildTek/bloc/auth/login/login_event.dart';
 import 'package:BuildTek/constants/asset_constants.dart';
 import 'package:BuildTek/constants/color_constants.dart';
 import 'package:BuildTek/constants/style_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../wrapper_class/response_sizedbox.dart';
 import '../../wrapper_class/responseive_container.dart';
@@ -44,7 +47,10 @@ class _ForgetPasswordFieldState extends State<ForgetPasswordField> {
             ResponsiveText(
               'ASK YOUR ADMIN',
               style: StyleConstants.customStyle(
-                  14, Color.fromRGBO(0, 83, 128, 1), FontWeight.w400),
+                14,
+                Color.fromRGBO(0, 83, 128, 1),
+                FontWeight.w400,
+              ),
             ),
             ResponsiveSizedBox(width: 0, height: 40),
             _buildEmailAndResetPassword(),
@@ -77,10 +83,7 @@ class _ForgetPasswordFieldState extends State<ForgetPasswordField> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildEmailField(),
-          _buildResetPasswordButton(),
-        ],
+        children: [_buildEmailField(), _buildResetPasswordButton()],
       ),
     );
   }
@@ -96,16 +99,20 @@ class _ForgetPasswordFieldState extends State<ForgetPasswordField> {
           ResponsiveText(
             'USERNAME',
             style: StyleConstants.customStyle(
-                12, Color.fromRGBO(0, 119, 182, 1), FontWeight.w600),
+              12,
+              Color.fromRGBO(0, 119, 182, 1),
+              FontWeight.w600,
+            ),
           ),
           Expanded(
             child: TextField(
               controller: phoneNoController,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
+              decoration: InputDecoration(border: InputBorder.none),
               style: StyleConstants.customStyle(
-                  20, Colors.black, FontWeight.w500),
+                20,
+                Colors.black,
+                FontWeight.w500,
+              ),
               readOnly: !isEditable,
             ),
           ),
@@ -135,9 +142,9 @@ class _ForgetPasswordFieldState extends State<ForgetPasswordField> {
             phoneNoController.text.length > 10) {
           return;
         }
-        // context
-        //     .read<AuthLoginBloc>()
-        //     .add(SendOTPEvent(phoneNo: phoneNoController.text));
+        context.read<AuthLoginBloc>().add(
+          AuthGetOTPEvent(phoneNo: phoneNoController.text),
+        );
       },
       child: ResponsiveContainer(
         width: 366,
@@ -160,11 +167,7 @@ class _ForgetPasswordFieldState extends State<ForgetPasswordField> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Image.asset(
-              AssetConstants.rightArrowIcon,
-              width: 20,
-              height: 8,
-            )
+            Image.asset(AssetConstants.rightArrowIcon, width: 20, height: 8),
           ],
         ),
       ),
